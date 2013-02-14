@@ -1,8 +1,7 @@
-% Learning Registry in 20 minutes or less
-% 
-% 
+# Learning Registry in 20 minutes or less
 
-Learning Registry\
+Learning Registry
+
 in 20 Minutes or Less
 
 Welcome to the Learning Registry project! This document will get you
@@ -83,11 +82,12 @@ going to program in Python you may want to consider doing so. However,
 the following [cURL](http://curl.haxx.se/) method is simple and should
 work anywhere:
 
-curl -O http://python-distribute.org/distribute\_setup.py
+curl -O http://python-distribute.org/distribute_setup.py
 
 python distribute\_setup.py
 
-curl -O https://raw.github.com/pypa/pip/master/contrib/get-pip.py\
+curl -O https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+
 python get-pip.py
 
 LRSignature
@@ -98,9 +98,9 @@ LRSignature
     Registry resource document signing, validation, and key management
     module. Install with this command:
 
-pip install LRSignature\
-\
-\
+pip install LRSignature
+
+
 
 Create Key Pair
 ===============
@@ -123,7 +123,7 @@ GPG --gen-key
     your GPG private key which is used to sign your documents on
     Learning Registry.
 
-Windows\
+Windows
 
 If you're on Windows, you need to find out where your GPG keyring is
 stored so you can pass that path info to the LRSignature utility. An
@@ -193,6 +193,7 @@ Registry Technical Specification](http://goo.gl/2Cf3L) document.
 
 [](#)[](#)
 
+```
 {
 
 "TOS": {
@@ -255,10 +256,11 @@ xml\_or\_whatever\_here",
 "resource\_locator": "URI\_of\_resource"
 
 }
+```
 
 You're now ready to sign this document with LRSignature.
 
-#### 
+####
 
 Signing the Document
 ====================
@@ -282,15 +284,16 @@ Sign and Save as Local File
 Note: The commands below have been separated into multiple lines of text
 for readability purposes.
 
-Mac/Linux\
+Mac/Linux
 
-cat test.json | python -m LRSignature.cmd sign ↲
 
---key "E7E350E792BC9A16D7704408FF7F6E95B2A133FA" ↲
+cat test.json | python -m LRSignature.cmd sign
 
---key-location "http://myserver.com/GPG/public-key.txt" ↲
+--key "E7E350E792BC9A16D7704408FF7F6E95B2A133FA"
 
---passphrase "your secret passphrase" ↲
+--key-location "http://myserver.com/GPG/public-key.txt"
+
+--passphrase "your secret passphrase"
 
 \> test.signed.json
 
@@ -587,7 +590,7 @@ Change Log
 
 * * * * *
 
-\
+
 
 [](#)[](#)
 
