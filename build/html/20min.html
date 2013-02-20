@@ -1,0 +1,556 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Setup &mdash; lr 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="lr 0.1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">lr 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>Learning Registry
+in 20 Minutes or Less</p>
+<p>Welcome to the Learning Registry project! This document will get you
+rolling with creating, uploading, downloading, and verifying envelopes
+in and out of Learning Registry server. This tutorial should work on
+Windows, Linux, and Mac OS X machines.</p>
+<p>Additional technical information about the Learning Registry may be
+found in the <a class="reference external" href="https://docs.google.com/document/d/1Bq_69wnnQJ56O6jyLK2C_fcp-Ovb7MYxXUXD0Rl1Mag/edit?hl=en_US&amp;authkey=CK7k5r8F">Quick Reference
+Guide</a>.</p>
+<p>` &lt;#&gt;`_` &lt;#&gt;`_</p>
+<p>Contents</p>
+<p>` &lt;#&gt;`_` &lt;#&gt;`_</p>
+<p><a class="reference external" href="#h.vm0zy647fvu6">Setup</a></p>
+<p><a class="reference external" href="#h.uj3qelg1wxdy">Installation</a></p>
+<p><a class="reference external" href="#h.8a3rv2ixcnmt">distribute and pip</a></p>
+<p><a class="reference external" href="#h.ki7pqrcfnsje">LRSignature</a></p>
+<p><a class="reference external" href="#h.bju4nx8yyonr">Create Key Pair</a></p>
+<p><a class="reference external" href="#h.jqcy2d72ek9w">Create the JSON File</a></p>
+<p><a class="reference external" href="#h.4tuf2wrs7wd2">Signing the Document</a></p>
+<p><a class="reference external" href="#h.9c3tc9dd522w">Sign and Save as Local File</a></p>
+<p><a class="reference external" href="#h.h3wrdit2pw6x">Sign and Upload Document</a></p>
+<p><a class="reference external" href="#h.34t4p6z88ri6">Download Document</a></p>
+<p><a class="reference external" href="#h.e2iqv95k1kmh">Verifying Signatures</a></p>
+<p><a class="reference external" href="#h.hh0f6yk5xtsb">Slicing Data (Bonus Section)</a></p>
+<p><a class="reference external" href="#h.qc6l49dg9tex">Change Log</a></p>
+<div class="section" id="id1">
+<h1>Setup<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<p>Before you start your 20-minute clock, you’ll need to make sure you’re
+set up properly. You need to know just enough Unix to be dangerous
+because you’ll be entering commands into the shell. That means in order
+to get up and running, you&#8217;ll need to have
+<a href="#id2"><span class="problematic" id="id3">`</span></a>Python &lt;<a class="reference external" href="http://www.python.org/">http://www.python.org/</a>&gt;`_2.6.5+ and
+<a href="#id4"><span class="problematic" id="id5">`</span></a>GPG &lt;<a class="reference external" href="http://www.gnupg.org/">http://www.gnupg.org/</a>&gt;`_2.0.17+ installed and accessible in your
+path. Depending upon your development platform, you may have to
+separately download and install some of the additional modules mentioned
+below.</p>
+<p>Important! You must have GPG and Python in your path.</p>
+</div>
+<div class="section" id="id6">
+<h1>Installation<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="section" id="id7">
+<h2>distribute and pip<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://www.pip-installer.org/en/latest/installing.html">Install both distribute and
+pip</a> with
+the commands below. This assumes you have curl installed. If not,
+download get-pip.py by other means.</li>
+</ol>
+<p>There are many ways to install pip and Python, including using
+<a class="reference external" href="http://www.virtualenv.org/en/latest/index.html">virtualenv</a>. If
+you&#8217;re going to program in Python you may want to consider doing so.
+However, the following <a class="reference external" href="http://curl.haxx.se/">cURL</a> method is simple
+and should work anywhere:</p>
+<p>curl -O <a class="reference external" href="http://python-distribute.org/distribute_setup.py">http://python-distribute.org/distribute_setup.py</a></p>
+<p>python distribute_setup.py</p>
+<p>curl -O <a class="reference external" href="https://raw.github.com/pypa/pip/master/contrib/get-pip.py">https://raw.github.com/pypa/pip/master/contrib/get-pip.py</a>
+python get-pip.py</p>
+</div>
+<div class="section" id="id8">
+<h2>LRSignature<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple" start="2">
+<li>Once you have Python, distribute and pip installed, you need to
+install LRSignature module for python. LRSignature is a Learning
+Registry resource document signing, validation, and key management
+module. Install with this command:</li>
+</ol>
+<p>pip install LRSignature</p>
+</div>
+</div>
+<div class="section" id="id9">
+<h1>Create Key Pair<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<ol class="arabic simple" start="3">
+<li>Next you need to create a public and private key pair in GPG:</li>
+</ol>
+<p>GPG &#8211;gen-key</p>
+<ol class="arabic simple">
+<li>Choose the kind of key you want. Default is &#8220;RSA and RSA.&#8221;</li>
+<li>Choose any key size. Default is 2048.</li>
+<li>Choose an expiration. For testing and many applications, &#8220;does not
+expire&#8221; is fine.</li>
+<li>Provide your name, email, and a comment as you wish to be identified
+with the key.</li>
+<li>Provide a passphrase. This step is very important. It should be hard
+to guess and you need to remember it without writing it down
+somewhere anyone can get a copy. The passphrase is what protects your
+GPG private key which is used to sign your documents on Learning
+Registry.</li>
+</ol>
+<p>Windows</p>
+<p>If you&#8217;re on Windows, you need to find out where your GPG keyring is
+stored so you can pass that path info to the LRSignature utility. An
+easy way to find out where the keyring is stored is with this command.</p>
+<p>GPG &#8211;list-keys</p>
+<p>You&#8217;ll see the path on the first line of the results. The path is
+everything but the file name. If you have a file path of:</p>
+<p>&#8220;c:/Users/username/AppData/Roaming/GPG/pubring.GPG&#8221;</p>
+<p>You should have a GPG keyring path similar to:</p>
+<p>&#8220;c:/Users/username/AppData/Roaming/GPG&#8221;</p>
+<ol class="arabic simple" start="4">
+<li>You need to get the fingerprint for your GPG keyset. To find the
+fingerprint, run</li>
+</ol>
+<p>GPG &#8211;fingerprint</p>
+<ol class="arabic simple" start="5">
+<li>This part is a little annoying. The finger print is listed as &#8220;Key
+fingerprint =&#8221;. You need to take the string of chars after the
+fingerprint and remove all the spaces from it to create a fingerprint
+that you can actually use. In the end it will look something like:</li>
+</ol>
+<p>E7E350E792BC9A16D7704408FF7F6E95B2A133FA</p>
+<ol class="arabic simple" start="6">
+<li>Next create a file of your public key (substitute YOUR signature
+below):</li>
+</ol>
+<p>GPG &#8211;export &#8211;armor &#8220;E7E350E792BC9A16D7704408FF7F6E95B2A133FA&#8221; &gt;
+public-key.txt</p>
+<ol class="arabic simple" start="7">
+<li>You need to upload your public key to a public server somewhere. You
+can upload it to an SKS server or you can just host it on your own
+website somewhere. It&#8217;s simplest for this example just to host the
+file on a web server somewhere.</li>
+</ol>
+<p>Let&#8217;s say you&#8217;re going to host it at
+<a class="reference external" href="http://myserver.com/GPG/public-key.txt">http://myserver.com/GPG/public-key.txt</a>. Upload that file to your web
+server in that location. Now your GPG system is all set up.</p>
+<p>Don&#8217;t forget your passphrase or lose your GPG keyring file. Back them up
+securely as appropriate. If you lose either one, you can&#8217;t sign
+documents with that identity any longer. If someone steals both, they
+can sign documents that appear to belong to you.</p>
+</div>
+<div class="section" id="id10">
+<h1>Create the JSON File<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<p>The next step is to obtain a test JSON envelope that you can use as a
+test to upload into the Learning Registry.</p>
+<ol class="arabic simple" start="8">
+<li>Save the JSON text below into a text file and save it as &#8220;test.json&#8221;.
+If you wish, edit the file to add custom data elements. For starters,
+you could add and edit elements in &#8220;keys&#8221; and &#8220;payload_schema&#8221;.</li>
+</ol>
+<p>You can read the full description of the envelope in the <a class="reference external" href="http://goo.gl/2Cf3L">Learning
+Registry Technical Specification</a> document.</p>
+<p>` &lt;#&gt;`_` &lt;#&gt;`_</p>
+<p>` &lt;#&gt;`_` &lt;#&gt;`_</p>
+<p>{</p>
+<p>&#8220;TOS&#8221;: {</p>
+<p>&#8220;submission_TOS&#8221;: &#8220;<a class="reference external" href="http://www.learningregistry.org/tos/cc0/v0-5/">http://www.learningregistry.org/tos/cc0/v0-5/</a>&#8220;</p>
+<p>},</p>
+<p>&#8220;active&#8221;: true,</p>
+<p>&#8220;doc_type&#8221;: &#8220;resource_data&#8221;,</p>
+<p>&#8220;doc_version&#8221;: &#8220;0.23.0&#8221;,</p>
+<p>&#8220;identity&#8221;: {</p>
+<p>&#8220;curator&#8221;: &#8220;&#8221;,</p>
+<p>&#8220;owner&#8221;: &#8220;&#8221;,</p>
+<p>&#8220;submitter&#8221;: &#8220;your name or organization here&#8221;,</p>
+<p>&#8220;signer&#8221;: &#8220;your name or org, if you&#8217;re signing the document&#8221;,</p>
+<p>&#8220;submitter_type&#8221;: &#8220;agent&#8221;</p>
+<p>},</p>
+<p>&#8220;keys&#8221;: [</p>
+<p>&#8220;science&#8221;,</p>
+<p>&#8220;Newton&#8221;,</p>
+<p>&#8220;apple&#8221;,</p>
+<p>&#8220;what_ever_you_want&#8221;</p>
+<p>],</p>
+<p>&#8220;payload_placement&#8221;: &#8220;inline&#8221;,</p>
+<p>&#8220;payload_schema&#8221;: [</p>
+<p>&#8220;hashtags&#8221;,</p>
+<p>&#8220;describing&#8221;,</p>
+<p>&#8220;resource_locator&#8221;,</p>
+<p>&#8220;format&#8221;</p>
+<p>],</p>
+<p>&#8220;resource_data&#8221;: &#8220;Put_anything_like_metadata,
+xml_or_whatever_here&#8221;,</p>
+<p>&#8220;resource_data_type&#8221;: &#8220;metadata&#8221;,</p>
+<p>&#8220;resource_locator&#8221;: &#8220;URI_of_resource&#8221;</p>
+<p>}</p>
+<p>You&#8217;re now ready to sign this document with LRSignature.</p>
+</div>
+<div class="section" id="id11">
+<h1>Signing the Document<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<p>LRSignature offers two methods to sign your JSON document. The first
+method creates the signed document and saves to you a local file which
+you specify. The second method signs the document and then, rather than
+saving locally, published the signed document directly to the location
+you specify.</p>
+<div class="section" id="id12">
+<h2>Sign and Save as Local File<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple" start="9">
+<li>To sign a document and save the file locally, run the following
+command, depending on your platform, from within the folder where
+your test.json document is saved. In this example, the signed
+document will be named test.signed.json.</li>
+</ol>
+<p>Note: The commands below have been separated into multiple lines of text
+for readability purposes.</p>
+<p>Mac/Linux</p>
+<p>cat test.json | python -m LRSignature.cmd sign ↲</p>
+<p>&#8211;key &#8220;E7E350E792BC9A16D7704408FF7F6E95B2A133FA&#8221; ↲</p>
+<p>&#8211;key-location &#8220;<a class="reference external" href="http://myserver.com/GPG/public-key.txt">http://myserver.com/GPG/public-key.txt</a>&#8221; ↲</p>
+<p>&#8211;passphrase &#8220;your secret passphrase&#8221; ↲</p>
+<p>&gt; test.signed.json</p>
+<p>Windows</p>
+<p>Note that the word &#8220;type&#8221; below is a windows command that you must
+include.</p>
+<p>type test.json | python -m LRSignature.cmd sign ↲</p>
+<p>&#8211;key &#8220;E7E350E792BC9A16D7704408FF7F6E95B2A133FA&#8221; ↲</p>
+<p>&#8211;key-location &#8220;<a class="reference external" href="http://myserver.com/GPG/public-key.txt">http://myserver.com/GPG/public-key.txt</a>&#8221; ↲</p>
+<p>&#8211;passphrase &#8220;your secret passphrase&#8221; ↲</p>
+<p>&#8211;gnupghome &#8220;path_to_GPG_keyring_from_above&#8221; ↲</p>
+<p>&gt; test.signed.json</p>
+<p>You should now have a new text file &#8220;test.signed.json&#8221; which will be
+just like the &#8220;test.json&#8221; file except that it will have your signature
+block in it.</p>
+</div>
+<div class="section" id="obtain-publishing-credentials">
+<h2>Obtain Publishing Credentials<a class="headerlink" href="#obtain-publishing-credentials" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple" start="10">
+<li>Publishing to any node, including sandbox, requires obtaining an
+authorized account on the node that is the target of the publish. To
+obtain an authorized account on a node, go to /auth on the node
+(e.g., for sandbox, go to
+<a class="reference external" href="http://sandbox.learningregistry.org/auth">http://sandbox.learningregistry.org/auth</a>).</li>
+</ol>
+<p>The web application for managing publish authorizations uses Mozilla
+Persona for email validation, so you will need to create a Persona
+account if you don&#8217;t have one. You will receive an email with a link to
+confirm your email address and then you should be able to login and set
+a Basic Auth publishing password.</p>
+<p>NOTE: the Basic Auth password is NOT your Persona password. The new
+authorization mechanism also supports switching from Basic Auth to
+OAuth. A publishing authorization account is required for each node that
+you publish to.</p>
+<p>` &lt;#&gt;`_Sign and Upload Document</p>
+<ol class="arabic simple" start="11">
+<li>The test.json document may be directly published to Learning
+Registry public sandbox servers for testing. You can publish to any
+Learning Registry compatible node using the same technique.</li>
+</ol>
+<p>To sign and publish a document run the following command, depending on
+your platform, from within the folder where your test.json document is
+saved.</p>
+<p>Note: The commands below have been separated into multiple lines of text
+for readability purposes.</p>
+<p>Mac/Linux</p>
+<p>cat test.json | python -m LRSignature.cmd sign ↲</p>
+<p>&#8211;key &#8220;E7E350E792BC9A16D7704408FF7F6E95B2A133FA&#8221; ↲</p>
+<p>&#8211;key-location &#8220;<a class="reference external" href="http://myserver.com/GPG/public-key.txt">http://myserver.com/GPG/public-key.txt</a>&#8221; ↲</p>
+<p>&#8211;passphrase &#8220;your secret passphrase&#8221; ↲</p>
+<p>&#8211;publish-url &#8220;<a class="reference external" href="http://sandbox.learningregistry.org/publish">http://sandbox.learningregistry.org/publish</a>&#8221; ↲</p>
+<p>&#8211;publish-username “your publish account username” ↲</p>
+<p>&#8211;publish-password “your publish account password”</p>
+<p>Windows</p>
+<p>Note that the word &#8220;type&#8221; below is a windows command that you must
+included:</p>
+<p>type test.json | python -m LRSignature.cmd sign ↲</p>
+<p>&#8211;key &#8220;E7E350E792BC9A16D7704408FF7F6E95B2A133FA&#8221; ↲</p>
+<p>&#8211;key-location &#8220;<a class="reference external" href="http://myserver.com/GPG/public-key.txt">http://myserver.com/GPG/public-key.txt</a>&#8221; ↲</p>
+<p>&#8211;passphrase &#8220;your secret passphrase&#8221; ↲</p>
+<p>&#8211;publish-url &#8220;<a class="reference external" href="http://sandbox.learningregistry.org/publish">http://sandbox.learningregistry.org/publish</a>&#8221; ↲</p>
+<p>&#8211;publish-username “your publish account username” ↲</p>
+<p>&#8211;publish-password “your publish account password” ↲</p>
+<p>&#8211;gnupghome &#8220;path_to_GPG_keyring_from_above&#8221;</p>
+<p>In both instances you should see the following results though the
+doc_ID value will differ:</p>
+<p>[{&#8220;document_results&#8221;: [{&#8220;OK&#8221;: true, &#8220;doc_ID&#8221;:
+&#8220;761e70f774634030914fa45617fc8815&#8221;}], &#8220;OK&#8221;: true}]</p>
+</div>
+</div>
+<div class="section" id="id13">
+<h1>Download Document<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<ol class="arabic simple" start="12">
+<li>If you want to get a copy back right away, you can get the document
+using cURL, any http library, or a a web browser. Once the nodes
+replicate with each other, ask any node in the network for it.</li>
+</ol>
+<p>If downloading with a browser be sure to include the query string at the
+end of the URL. In this case, a Boolean value of true indicates that you
+wish to reference a document directly by it&#8217;s doc_ID created in the
+previous upload example.</p>
+<p>Note: The commands below have been separated into multiple lines of text
+for readability purposes.</p>
+<p>Web Browser</p>
+<p><a class="reference external" href="http://sandbox.learningregistry.org/harvest/getrecord">http://sandbox.learningregistry.org/harvest/getrecord</a> ↲</p>
+<p>?request_ID=the doc_ID returned from the upload ↲</p>
+<p>&amp;by_doc_ID=true</p>
+<p>In the case of our example, this URL would be:</p>
+<p><a class="reference external" href="http://sandbox.learningregistry.org/harvest/getrecord">http://sandbox.learningregistry.org/harvest/getrecord</a> ↲</p>
+<p>?request_ID=761e70f774634030914fa45617fc8815 ↲</p>
+<p>&amp;by_doc_ID=true</p>
+<p>cURL</p>
+<p>To directly save the document run the following command from within the
+folder where your test.signed.json document is saved. The downloaded
+document will be named test.download.json.</p>
+<p>curl -o test.download.json ↲</p>
+<p>&#8220;<a class="reference external" href="http://sandbox.learningregistry.org/harvest/getrecord">http://sandbox.learningregistry.org/harvest/getrecord</a> ↲</p>
+<p>?request_ID=761e70f774634030914fa45617fc8815 ↲</p>
+<p>&amp;by_doc_ID=true&#8221;</p>
+</div>
+<div class="section" id="id14">
+<h1>Verifying Signatures<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<ol class="arabic simple" start="13">
+<li>Once you obtain a document back from the Learning Registry, you can
+verify that the signature provided in that document is valid, and
+that the content that is in the envelope hasn&#8217;t been changed since
+the document was signed.</li>
+</ol>
+<p>Note: The commands below have been separated into multiple lines of text
+for readability purposes.</p>
+<p>Mac/Linux</p>
+<p>cat test.download.json | python -m LRSignature.cmd verify</p>
+<p>Windows</p>
+<p>Note that the word &#8220;type&#8221; below is a windows command that you must
+included:</p>
+<p>type test.download.json | python -m LRSignature.cmd verify ↲</p>
+<p>&#8211;gnupghome &#8220;path_to_GPG_keyring_from_above&#8221;</p>
+<p>In both instances you should see results like this:</p>
+<p>{&#8220;results&#8221;: [{&#8220;resource_locator&#8221;:
+&#8220;<a class="reference external" href="http://resource_locator_url_will_appear_here">http://resource_locator_url_will_appear_here</a>&#8221;, &#8220;verified&#8221;: true}]}</p>
+<p>OK! That&#8217;s a full round-trip. You created and uploaded a valid Learning
+Registry document, and then downloaded a copy back to your local
+machine.</p>
+</div>
+<div class="section" id="id15">
+<h1>Slicing Data (Bonus Section)<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<p>Let&#8217;s take a quick look at slicing data. For a more detailed look at
+slicing, see the <cite>Learning Registry -
+Slicing &lt;http://goo.gl/kpgqD&gt;`_</cite> &lt;<a class="reference external" href="http://goo.gl/kpgqD">http://goo.gl/kpgqD</a>&gt;`_documentation.
+The &#8220;slice&#8221; function is an optional service in the Learning Registry
+that lets you easily pull down a set of documents from a node, based on
+certain criteria. At the time of this writing you can slice data using
+the following parameters:</p>
+<ol class="arabic simple">
+<li>identity: matches documents with value found in any identity
+sub-field (submitter, curator, owner, signer)</li>
+<li>any_tags: matches documents with value found in the keys field</li>
+<li>from: matches documents submitted on date from (format: YYYY-MM-DD,
+1-day granularity)</li>
+<li>from, until: matches documents submitted between from value
+(inclusive) and until value (non-inclusive).</li>
+</ol>
+<ol class="arabic simple" start="14">
+<li>To invoke slice, you basically construct an HTTP GET in the format
+below. In the <a href="#id16"><span class="problematic" id="id17">`</span></a>Upload Document &lt;#id.nwdi8l8cy4p&gt;`_section the
+&#8220;test.signed.json&#8221; document with the word &#8220;science&#8221; in the &#8220;key&#8221;
+array was published. Running the following command you should find
+at least that one document:</li>
+</ol>
+<p>Web Browser</p>
+<p><a class="reference external" href="http://sandbox.learningregistry.org/slice?any_tags=science">http://sandbox.learningregistry.org/slice?any_tags=science</a></p>
+<p>cURL</p>
+<p>curl -o test.science.json
+&#8220;<a class="reference external" href="http://sandbox.learningregistry.org/slice?any_tags=science&amp;ids_only=true">http://sandbox.learningregistry.org/slice?any_tags=science&amp;ids_only=true</a>&#8220;</p>
+<p>You should get results resembling those below. These results have been
+separated into multiple lines of text for readability purposes.</p>
+<p>{</p>
+<p>&#8220;replyStart&#8221;:&#8221;2011-09-15 21:10:37.522239&#8221;,</p>
+<p>&#8220;keyCount&#8221;:1,</p>
+<p>&#8220;documents&#8221;:[{&#8220;doc_ID&#8221;: &#8220;761e70f774634030914fa45617fc8815&#8221;}],</p>
+<p>&#8220;resultCount&#8221;:1,</p>
+<p>&#8220;replyEnd&#8221;:&#8221;2011-09-15 21:10:37.908154&#8221;</p>
+<p>}</p>
+<p>In the case of multiple documents being found the results will resemble:</p>
+<p>{</p>
+<p>&#8220;replyStart&#8221;:&#8221;2011-09-15 20:24:14.207687&#8221;,</p>
+<p>&#8220;keyCount&#8221;:1,</p>
+<p>&#8220;documents&#8221;:[</p>
+<p>{&#8220;doc_ID&#8221;: &#8220;761e70f774634030914fa45617fc8815&#8221;, ...etc.},</p>
+<p>{&#8220;doc_ID&#8221;: &#8220;85924442d9ab431b93732440940a3636&#8221;, ...etc.},</p>
+<p>{&#8220;doc_ID&#8221;: &#8220;62c2ee17dbcd4899b373cd4cf63ae669&#8221;, ...etc.}</p>
+<p>],</p>
+<p>&#8220;resultCount&#8221;:3,</p>
+<p>&#8220;replyEnd&#8221;:&#8221;2011-09-15 20:24:15.170966&#8221;</p>
+<p>}</p>
+<p>When ids_only is set to true, Slice returns a JSON document which
+includes an array of document ID&#8217;s matching your parameters. The default
+value of ids_only is false and if not explicitly set to true will
+return the full documents.</p>
+<p>In addition to the any_tags option you can submit specific parameters
+to narrow your search. For example, if you were only interested in
+documents posted after a specific date you could query based on the date
+of publication to Learning Registry by using the &#8220;from&#8221; field. The
+optional &#8220;from&#8221; field has a format of YYYY-MM-DD. For example,
+&#8220;from=2011-09-15&#8221;.</p>
+<p>Another optional field is &#8220;identity&#8221;. This is the name of the person or
+organization that is the submitter, author, owner, or curator. An
+example is &#8220;identity=US Dept of Education&#8221;.</p>
+<p>If I wished to locate items submitted by &#8220;US Dept of Education&#8221; on or
+after September 15, 2011 it would include &#8220;from=2011-09-15&#8221; as well as
+&#8220;identity=US Dept of Education&#8221;. If you combine these options they are
+ANDed together.</p>
+<p>Specifying a value for &#8220;from&#8221; and &#8220;any_tags&#8221; returns documents
+published on or after &#8220;start_date&#8221; and matching the tags you specify in
+the &#8220;any_tags&#8221; field.</p>
+<p>Some Learning Registry nodes will have Flow Control enabled for Slice.
+This means that the node administrator has specified a limit on the
+number of results returned for a given query. In such cases, when
+results are returned, they will include a “resumption_token” field. The
+value of this field is a token that can be used as an argument to
+reSlice the node, after which the next page of results is returned.</p>
+</div>
+<div class="section" id="id18">
+<h1>Change Log<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<p>` &lt;#&gt;`_` &lt;#&gt;`_</p>
+<p>Version</p>
+<p>Date</p>
+<p>Description</p>
+<p>1.00</p>
+<p>20110616</p>
+<p>Initial version</p>
+<p>1.01</p>
+<p>20110623</p>
+<p>Minor cleanup, wording improvements</p>
+<p>1.02</p>
+<p>20110623</p>
+<p>Fixed bug (with temp workaround) in Unix/Mac command lines</p>
+<p>1.03</p>
+<p>20110916</p>
+<p>Added cURL examples. Updated sample code to latest implementation. Added
+Flow Control information to Slicing. General edits and formatting.</p>
+<p>1.04</p>
+<p>20110923</p>
+<p>Seperated Signing section into local and publish. Correct publish sample
+code error.</p>
+<p>1.05</p>
+<p>20110930</p>
+<p>Corrected Heading settings.</p>
+<p>1.06</p>
+<p>20111020</p>
+<p>Corrected request_ID case.</p>
+<p>1.07</p>
+<p>20120201</p>
+<p>Replaced references to lrtest02 with references to sandbox.</p>
+<p>1.08</p>
+<p>20121211</p>
+<p>Updated publish information to include authorization procedures.</p>
+<p>Learning Registry in 20 Minutes or Less, V1.3. © 2011, US Dept of
+Education: CC-BY-3.0</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Setup</a></li>
+<li><a class="reference internal" href="#id6">Installation</a><ul>
+<li><a class="reference internal" href="#id7">distribute and pip</a></li>
+<li><a class="reference internal" href="#id8">LRSignature</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id9">Create Key Pair</a></li>
+<li><a class="reference internal" href="#id10">Create the JSON File</a></li>
+<li><a class="reference internal" href="#id11">Signing the Document</a><ul>
+<li><a class="reference internal" href="#id12">Sign and Save as Local File</a></li>
+<li><a class="reference internal" href="#obtain-publishing-credentials">Obtain Publishing Credentials</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id13">Download Document</a></li>
+<li><a class="reference internal" href="#id14">Verifying Signatures</a></li>
+<li><a class="reference internal" href="#id15">Slicing Data (Bonus Section)</a></li>
+<li><a class="reference internal" href="#id18">Change Log</a></li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/20min.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">lr 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, LR Team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
